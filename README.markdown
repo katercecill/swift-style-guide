@@ -1,9 +1,7 @@
-# The Official raywenderlich.com Swift Style Guide.
-### Updated for Swift 3
+# The Official Kater Swift Style Guide.
 
-This style guide is different from others you may see, because the focus is centered on readability for print and the web. We created this style guide to keep the code in our books, tutorials, and starter kits nice and consistent — even though we have many different authors working on the books.
-
-Our overarching goals are clarity, consistency and brevity, in that order.
+This style-guide is inspired by the Ray Wenderlich Swift style guide, modified to
+fit Kater needs.
 
 ## Table of Contents
 
@@ -188,17 +186,17 @@ In particular, when adding protocol conformance to a model, prefer adding a sepa
 **Preferred:**
 ```swift
 class MyViewController: UIViewController {
-  // class stuff here
+    // class stuff here
 }
 
 // MARK: - UITableViewDataSource
 extension MyViewController: UITableViewDataSource {
-  // table view data source methods
+    // table view data source methods
 }
 
 // MARK: - UIScrollViewDelegate
 extension MyViewController: UIScrollViewDelegate {
-  // scroll view delegate methods
+    // scroll view delegate methods
 }
 ```
 
@@ -222,7 +220,7 @@ Aspirational methods not directly associated with the tutorial whose implementat
 **Preferred:**
 ```swift
 override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-  return Database.contacts.count
+    return Database.contacts.count
 }
 ```
 
@@ -250,9 +248,7 @@ Keep imports minimal. For example, don't import `UIKit` when importing `Foundati
 
 ## Spacing
 
-* Indent using 2 spaces rather than tabs to conserve space and help prevent line wrapping. Be sure to set this preference in Xcode and in the Project settings as shown below:
-
-![Xcode indent settings](screens/indentation.png)
+* Indent using 4 spaces rather than tabs to conserve space and help prevent line wrapping. Be sure to set this preference in Xcode and in the Project settings
 
 * Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
 * Tip: You can re-indent by selecting some code (or ⌘A to select all) and then Control-I (or Editor\Structure\Re-Indent in the menu). Some of the Xcode template code will have 4-space tabs hard coded, so this is a good way to fix that.
@@ -260,9 +256,9 @@ Keep imports minimal. For example, don't import `UIKit` when importing `Foundati
 **Preferred:**
 ```swift
 if user.isHappy {
-  // Do something
+    // Do something
 } else {
-  // Do something else
+    // Do something else
 }
 ```
 
@@ -284,14 +280,14 @@ else {
 **Preferred:**
 ```swift
 class TestDatabase: Database {
-  var data: [String: CGFloat] = ["A": 1.2, "B": 3.2]
+    var data: [String: CGFloat] = ["A": 1.2, "B": 3.2]
 }
 ```
 
 **Not Preferred:**
 ```swift
 class TestDatabase : Database {
-  var data :[String:CGFloat] = ["A" : 1.2, "B":3.2]
+    var data :[String:CGFloat] = ["A" : 1.2, "B":3.2]
 }
 ```
 
@@ -324,39 +320,39 @@ Here's an example of a well-styled class definition:
 
 ```swift
 class Circle: Shape {
-  var x: Int, y: Int
-  var radius: Double
-  var diameter: Double {
-    get {
-      return radius * 2
+    var x: Int, y: Int
+    var radius: Double
+    var diameter: Double {
+        get {
+            return radius * 2
+        }
+        set {
+            radius = newValue / 2
+        }
     }
-    set {
-      radius = newValue / 2
+
+    init(x: Int, y: Int, radius: Double) {
+        self.x = x
+        self.y = y
+        self.radius = radius
     }
-  }
 
-  init(x: Int, y: Int, radius: Double) {
-    self.x = x
-    self.y = y
-    self.radius = radius
-  }
+    convenience init(x: Int, y: Int, diameter: Double) {
+        self.init(x: x, y: y, radius: diameter / 2)
+    }
 
-  convenience init(x: Int, y: Int, diameter: Double) {
-    self.init(x: x, y: y, radius: diameter / 2)
-  }
-
-  override func area() -> Double {
-    return Double.pi * radius * radius
-  }
+    override func area() -> Double {
+        return Double.pi * radius * radius
+    }
 }
 
 extension Circle: CustomStringConvertible {
-  var description: String {
-    return "center = \(centerString) area = \(area())"
-  }
-  private var centerString: String {
-    return "(\(x),\(y))"
-  }
+    var description: String {
+        return "center = \(centerString) area = \(area())"
+    }
+    private var centerString: String {
+        return "(\(x),\(y))"
+    }
 }
 ```
 
@@ -383,7 +379,7 @@ For conciseness, if a computed property is read-only, omit the get clause. The g
 **Preferred:**
 ```swift
 var diameter: Double {
-  return radius * 2
+    return radius * 2
 }
 ```
 
@@ -403,10 +399,10 @@ Marking classes or members as `final` in tutorials can distract from the main to
 ```swift
 // Turn any generic type into a reference type using this Box class.
 final class Box<T> {
-  let value: T
-  init(_ value: T) {
-    self.value = value
-  }
+    let value: T
+    init(_ value: T) {
+        self.value = value
+    }
 }
 ```
 
@@ -416,7 +412,7 @@ Keep short function declarations on one line including the opening brace:
 
 ```swift
 func reticulateSplines(spline: [Double]) -> Bool {
-  // reticulate code goes here
+    // reticulate code goes here
 }
 ```
 
@@ -425,7 +421,7 @@ For functions with long signatures, add line breaks at appropriate points and ad
 ```swift
 func reticulateSplines(spline: [Double], adjustmentFactor: Double,
     translateConstant: Int, comment: String) -> Bool {
-  // reticulate code goes here
+    // reticulate code goes here
 }
 ```
 
@@ -436,13 +432,13 @@ Use trailing closure syntax only if there's a single closure expression paramete
 **Preferred:**
 ```swift
 UIView.animate(withDuration: 1.0) {
-  self.myView.alpha = 0
+    self.myView.alpha = 0
 }
 
 UIView.animate(withDuration: 1.0, animations: {
-  self.myView.alpha = 0
+    self.myView.alpha = 0
 }, completion: { finished in
-  self.myView.removeFromSuperview()
+    self.myView.removeFromSuperview()
 })
 ```
 
@@ -463,7 +459,7 @@ For single-expression closures where the context is clear, use implicit returns:
 
 ```swift
 attendeeList.sort { a, b in
-  a > b
+    a > b
 }
 ```
 
@@ -473,9 +469,9 @@ Chained methods using trailing closures should be clear and easy to read in cont
 let value = numbers.map { $0 * 2 }.filter { $0 % 3 == 0 }.index(of: 90)
 
 let value = numbers
-  .map {$0 * 2}
-  .filter {$0 > 50}
-  .map {$0 + 10}
+    .map {$0 * 2}
+    .filter {$0 > 50}
+    .map {$0 + 10}
 ```
 
 ## Types
@@ -507,8 +503,8 @@ You can define constants on a type rather than on an instance of that type using
 **Preferred:**
 ```swift
 enum Math {
-  static let e = 2.718281828459045235360287
-  static let root2 = 1.41421356237309504880168872
+    static let e = 2.718281828459045235360287
+    static let root2 = 1.41421356237309504880168872
 }
 
 let hypotenuse = side * Math.root2
@@ -544,7 +540,7 @@ Use optional binding when it's more convenient to unwrap once and perform multip
 
 ```swift
 if let textContainer = self.textContainer {
-  // do many things with textContainer
+    // do many things with textContainer
 }
 ```
 
@@ -559,7 +555,7 @@ var volume: Double?
 
 // later on...
 if let subview = subview, let volume = volume {
-  // do something with unwrapped subview and volume
+    // do something with unwrapped subview and volume
 }
 ```
 
@@ -569,9 +565,9 @@ var optionalSubview: UIView?
 var volume: Double?
 
 if let unwrappedSubview = optionalSubview {
-  if let realVolume = volume {
-    // do something with unwrappedSubview and realVolume
-  }
+    if let realVolume = volume {
+        // do something with unwrappedSubview and realVolume
+    }
 }
 ```
 
@@ -583,11 +579,11 @@ Consider using lazy initialization for finer grain control over object lifetime.
 lazy var locationManager: CLLocationManager = self.makeLocationManager()
 
 private func makeLocationManager() -> CLLocationManager {
-  let manager = CLLocationManager()
-  manager.desiredAccuracy = kCLLocationAccuracyBest
-  manager.delegate = self
-  manager.requestAlwaysAuthorization()
-  return manager
+    let manager = CLLocationManager()
+    manager.desiredAccuracy = kCLLocationAccuracyBest
+    manager.delegate = self
+    manager.requestAlwaysAuthorization()
+    return manager
 }
 ```
 
@@ -687,11 +683,11 @@ Extend object lifetime using the `[weak self]` and `guard let strongSelf = self 
 **Preferred**
 ```swift
 resource.request().onComplete { [weak self] response in
-  guard let strongSelf = self else {
-    return
-  }
-  let model = strongSelf.updateModel(response)
-  strongSelf.updateUI(model)
+    guard let strongSelf = self else {
+        return
+    }
+    let model = strongSelf.updateModel(response)
+    strongSelf.updateUI(model)
 }
 ```
 
@@ -725,8 +721,8 @@ Use access control as the leading property specifier. The only things that shoul
 ```swift
 private let message = "Great Scott!"
 
-class TimeMachine {  
-  fileprivate dynamic lazy var fluxCapacitor = FluxCapacitor()
+class TimeMachine {
+    fileprivate dynamic lazy var fluxCapacitor = FluxCapacitor()
 }
 ```
 
@@ -746,19 +742,19 @@ Prefer the `for-in` style of `for` loop over the `while-condition-increment` sty
 **Preferred:**
 ```swift
 for _ in 0..<3 {
-  print("Hello three times")
+    print("Hello three times")
 }
 
 for (index, person) in attendeeList.enumerated() {
-  print("\(person) is at position #\(index)")
+    print("\(person) is at position #\(index)")
 }
 
 for index in stride(from: 0, to: items.count, by: 2) {
-  print(index)
+    print(index)
 }
 
 for index in (0...3).reversed() {
-  print(index)
+    print(index)
 }
 ```
 
@@ -787,15 +783,15 @@ When coding with conditionals, the left-hand margin of the code should be the "g
 ```swift
 func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies {
 
-  guard let context = context else {
-    throw FFTError.noContext
-  }
-  guard let inputData = inputData else {
-    throw FFTError.noInputData
-  }
+    guard let context = context else {
+        throw FFTError.noContext
+    }
+    guard let inputData = inputData else {
+        throw FFTError.noInputData
+    }
 
-  // use context and input to compute the frequencies
-  return frequencies
+    // use context and input to compute the frequencies
+    return frequencies
 }
 ```
 
@@ -824,7 +820,7 @@ When multiple optionals are unwrapped either with `guard` or `if let`, minimize 
 guard let number1 = number1,
       let number2 = number2,
       let number3 = number3 else {
-  fatalError("impossible")
+    fatalError("impossible")
 }
 // do something with numbers
 ```
@@ -875,7 +871,7 @@ Parentheses around conditionals are not required and should be omitted.
 **Preferred:**
 ```swift
 if name == "Hello" {
-  print("World")
+    print("World")
 }
 ```
 
@@ -895,9 +891,7 @@ let playerMark = (player == current ? "X" : "O")
 
 ## Organization and Bundle Identifier
 
-Where an Xcode project is involved, the organization should be set to `Ray Wenderlich` and the Bundle Identifier set to `com.razeware.TutorialName` where `TutorialName` is the name of the tutorial project.
-
-![Xcode Project settings](screens/project_settings.png)
+Where an Xcode project is involved, the organization should be set to `Kater` and the Bundle Identifier set to `com.kater.ProjectName` where `ProjectName` is the name of the project.
 
 ## Copyright Statement
 
@@ -905,48 +899,17 @@ The following copyright statement should be included at the top of every source
 file:
 
 ```swift
-/// Copyright (c) 2018 Razeware LLC
-/// 
-/// Permission is hereby granted, free of charge, to any person obtaining a copy
-/// of this software and associated documentation files (the "Software"), to deal
-/// in the Software without restriction, including without limitation the rights
-/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-/// copies of the Software, and to permit persons to whom the Software is
-/// furnished to do so, subject to the following conditions:
-/// 
-/// The above copyright notice and this permission notice shall be included in
-/// all copies or substantial portions of the Software.
-/// 
-/// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
-/// distribute, sublicense, create a derivative work, and/or sell copies of the
-/// Software in any work that is designed, intended, or marketed for pedagogical or
-/// instructional purposes related to programming, coding, application development,
-/// or information technology.  Permission for such use, copying, modification,
-/// merger, publication, distribution, sublicensing, creation of derivative works,
-/// or sale is expressly withheld.
-/// 
-/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-/// THE SOFTWARE.
+//
+// Copyright (c) 2018 Kater Technologies Inc. All rights reserved.
+//
 ```
 
-## Smiley Face
+## Credits
 
-Smiley faces are a very prominent style feature of the [raywenderlich.com](https://www.raywenderlich.com/) site! It is very important to have the correct smile signifying the immense amount of happiness and excitement for the coding topic. The closing square bracket `]` is used because it represents the largest smile able to be captured using ASCII art. A closing parenthesis `)` creates a half-hearted smile, and thus is not preferred.
+This style guide is based on the raywenderlich.com Java style guide with minor
+modifications to fit Kater needs made by:
 
-**Preferred:**
-```
-:]
-```
-
-**Not Preferred:**
-```
-:)
-```  
+- [Sasha Jolich](https://github.com/sasadjolic)
 
 ## References
 

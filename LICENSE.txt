@@ -1,5 +1,5 @@
 
-This style guide is available under the MIT license:
+This style guide is available under the MIT license: 
 
 Copyright (c) 2016-2017 Razeware LLC
 
